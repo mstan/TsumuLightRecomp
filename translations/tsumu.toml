@@ -1129,3 +1129,267 @@ width   = 24
 src_hex = "a082c882bd82cc82bc964f91f082b38ba682c482cb824281"
 src_jp  = "あなたの名前を教えてね。"
 en = "YOUR NAME?"
+
+[[entry]]
+src_hex = "65835b815783f082feffb982f182bd82ad82b582c482cb824281"
+term = "ffff"
+en = "Select a stage."
+
+[[entry]]
+src_hex = "5b815783f082feffb982f182bd82ad82b582c482cb824281"
+term = "ffff"
+en = "Select a stage."
+
+
+[[entry]]
+src_hex = "8c8378838b83f082feffb982f182bd82ad82b582c482cb824281ffff"
+term = "ffff"
+en = "Select a level."
+
+[[entry]]
+src_hex = "8c8378838b83f0824081b982f182bd82ad82b582c482cb824281ffff"
+term = "ffff"
+en = "Select a level."
+
+[[entry]]
+src_hex = "8c8378838b83f082b982f182bd82ad82b582c482cb824281ffff"
+term = "ffff"
+en = "Select a level."
+
+
+[[glyph_label]]
+addr    = 0x80070A6C
+width   = 28
+src_hex = "8c8378838b83f082feffb982f182bd82ad82b582c482cb824281ffff"
+src_jp  = "レベルを / せんたくしてね。"
+en      = "SELECT LEVEL"
+
+# --- menu/dialog static-patch strings (merged) ---
+
+[[glyph_label]]
+addr    = 0x80070958
+width   = 76
+src_hex = "588365835b815783f0824e838a834183b582c482a282ad82feffc68241814991d782e982588365835b815783aa82d382a682feffdc82b7824281df82b482b9827282898393834e834981ffff"
+en      = "Clear to open more.\nAim for S rank!"
+
+[[glyph_label]]
+addr    = 0x800709a4
+width   = 76
+src_hex = "6f83628365838a835b81a790c08cc882b582c5824181feffcc825b81dc82e982b0825b81de82cc82588365835b815783fefff082a98e5297c98276838c834383c582ab82dc82b7824281ffff"
+en      = "No battery limit.\nPlay Normal freely."
+
+[[glyph_label]]
+addr    = 0x800709f0
+width   = 72
+src_hex = "53915882588365835b815783cc8252835b815883f082feff4198b1914e838a834183b582c482a282ab82dc82b7824281feffbf82e582c182c682de82b882a982b582df824981ffff"
+en      = "Clear all 9 in a row.\nA bit tricky!"
+
+[[glyph_label]]
+addr    = 0x80070a38
+width   = 52
+src_hex = "b182ea82dc82c582cc82ac90d190f082feff818382838a835b814a835b816883c982feff5a835b817583b582dc82b7824281ffff"
+en      = "Save to Memory Card."
+
+[[glyph_label]]
+addr    = 0x80070a88
+width   = 30
+src_hex = "588365835b815783f082feffb982f182bd82ad82b582c482cb824281ffff"
+en      = "SELECT STAGE"
+
+[[glyph_label]]
+addr    = 0x80070aa8
+width   = 26
+src_hex = "bb82ea82b682e1824181aa82f182ce82c182c482cb824981ffff"
+en      = "Good luck!"
+
+[[glyph_label]]
+addr    = 0x80070ac4
+width   = 72
+src_hex = "86835b8155835b81cc82dd82c882b382f182a982e782cc82feff9e89e595ec8dcc82a482bf8241814497478fc882feff5482ec8d6995f082fb8e5e98b582dc82b582bd824281ffff"
+en      = "Includes 5 great\nuser-made stages."
+
+[[glyph_label]]
+addr    = 0x80070cdc
+width   = 24
+src_hex = "c782a4824881ab82bf82f182c682c282df82bd824881ffff"
+en      = "Packed OK?"
+
+[[glyph_label]]
+addr    = 0x80070e9c
+width   = 36
+src_hex = "bb82cc82b292718e4981feffa082c682bc94aa954181aa82f182ce82c182c4824981ffff"
+en      = "Keep going!"
+
+[[glyph_label]]
+addr    = 0x8007137c
+width   = 24
+src_hex = "588365835b815783bc96f082c282af82c482cb824281ffff"
+en      = "Name stage?"
+
+[[glyph_label]]
+addr    = 0x8007155c
+width   = 38
+src_hex = "b182cc82818382838a835b814a835b816883cd82fefff389ea82c482a282dc82b7824281ffff"
+en      = "Card is broken."
+
+[[glyph_label]]
+addr    = 0x80071584
+width   = 86
+src_hex = "f38bab8275838d8362834e83aa82feffab91e882dc82b982f182428130fcfeff7d836283768366835b815e83f082db95b691feffb782e982c982cd824181528275838d8362834e83feff4b957697c582b7824281ffff"
+en      = "Not enough space.\nMap data needs 3."
+
+[[glyph_label]]
+addr    = 0x800715dc
+width   = 24
+src_hex = "478389835b81aa82ad94b690b582dc82b582bd824281ffff"
+en      = "Error!"
+
+[[glyph_label]]
+addr    = 0x800715f4
+width   = 24
+src_hex = "5a835b817583c982b88e7394b582dc82b582bd824281ffff"
+en      = "Save failed"
+
+[[glyph_label]]
+addr    = 0x8007160c
+width   = 32
+src_hex = "748348835b817d8362836783c982feffb88e7394b582dc82b582bd824281ffff"
+en      = "Format failed."
+
+[[glyph_label]]
+addr    = 0x8007162c
+width   = 26
+src_hex = "748348835b817d8362836783b582c482a282dc82b7824281ffff"
+en      = "Formatting.."
+
+[[glyph_label]]
+addr    = 0x80071648
+width   = 40
+src_hex = "818382838a835b814a835b816883c982feff41834e835a835883b582c482a282dc82b7824281ffff"
+en      = "Reading Card..."
+
+[[glyph_label]]
+addr    = 0x80071670
+width   = 32
+src_hex = "b182cc8266835b815e83cd82feff678e7097c582ab82dc82b982f1824281ffff"
+en      = "Data unusable."
+
+[[glyph_label]]
+addr    = 0x80071690
+width   = 64
+src_hex = "76838c83438366835b815e83f0825a835b81758386924281feff818382838a835b814a835b816883f082feffb294a982c882a282c582ba89b382a2824281ffff"
+en      = "Saving. Don't\nremove Card."
+
+[[glyph_label]]
+addr    = 0x80070958
+width   = 76
+src_hex = "588365835b815783f0824e838a834183b582c482a282ad82feffc68241814991d782e982588365835b815783aa82d382a682feffdc82b7824281df82b482b9827282898393834e834981ffff"
+en      = "Clear to open more.\nAim for S rank!"
+
+[[glyph_label]]
+addr    = 0x800709a4
+width   = 76
+src_hex = "6f83628365838a835b81a790c08cc882b582c5824181feffcc825b81dc82e982b0825b81de82cc82588365835b815783fefff082a98e5297c98276838c834383c582ab82dc82b7824281ffff"
+en      = "No battery limit.\nPlay Normal freely."
+
+[[glyph_label]]
+addr    = 0x800709f0
+width   = 72
+src_hex = "53915882588365835b815783cc8252835b815883f082feff4198b1914e838a834183b582c482a282ab82dc82b7824281feffbf82e582c182c682de82b882a982b582df824981ffff"
+en      = "Clear all 9 in a row.\nA bit tricky!"
+
+[[glyph_label]]
+addr    = 0x80070a38
+width   = 52
+src_hex = "b182ea82dc82c582cc82ac90d190f082feff818382838a835b814a835b816883c982feff5a835b817583b582dc82b7824281ffff"
+en      = "Save to Memory Card."
+
+[[glyph_label]]
+addr    = 0x80070a88
+width   = 30
+src_hex = "588365835b815783f082feffb982f182bd82ad82b582c482cb824281ffff"
+en      = "SELECT STAGE"
+
+[[glyph_label]]
+addr    = 0x80070aa8
+width   = 26
+src_hex = "bb82ea82b682e1824181aa82f182ce82c182c482cb824981ffff"
+en      = "Good luck!"
+
+[[glyph_label]]
+addr    = 0x80070ac4
+width   = 72
+src_hex = "86835b8155835b81cc82dd82c882b382f182a982e782cc82feff9e89e595ec8dcc82a482bf8241814497478fc882feff5482ec8d6995f082fb8e5e98b582dc82b582bd824281ffff"
+en      = "Includes 5 great\nuser-made stages."
+
+[[glyph_label]]
+addr    = 0x80070cdc
+width   = 24
+src_hex = "c782a4824881ab82bf82f182c682c282df82bd824881ffff"
+en      = "Packed OK?"
+
+[[glyph_label]]
+addr    = 0x80070e9c
+width   = 36
+src_hex = "bb82cc82b292718e4981feffa082c682bc94aa954181aa82f182ce82c182c4824981ffff"
+en      = "Keep going!"
+
+[[glyph_label]]
+addr    = 0x8007137c
+width   = 24
+src_hex = "588365835b815783bc96f082c282af82c482cb824281ffff"
+en      = "Name stage?"
+
+[[glyph_label]]
+addr    = 0x8007155c
+width   = 38
+src_hex = "b182cc82818382838a835b814a835b816883cd82fefff389ea82c482a282dc82b7824281ffff"
+en      = "Card is broken."
+
+[[glyph_label]]
+addr    = 0x80071584
+width   = 86
+src_hex = "f38bab8275838d8362834e83aa82feffab91e882dc82b982f182428130fcfeff7d836283768366835b815e83f082db95b691feffb782e982c982cd824181528275838d8362834e83feff4b957697c582b7824281ffff"
+en      = "Not enough space.\nMap data needs 3."
+
+[[glyph_label]]
+addr    = 0x800715dc
+width   = 24
+src_hex = "478389835b81aa82ad94b690b582dc82b582bd824281ffff"
+en      = "Error!"
+
+[[glyph_label]]
+addr    = 0x800715f4
+width   = 24
+src_hex = "5a835b817583c982b88e7394b582dc82b582bd824281ffff"
+en      = "Save failed"
+
+[[glyph_label]]
+addr    = 0x8007160c
+width   = 32
+src_hex = "748348835b817d8362836783c982feffb88e7394b582dc82b582bd824281ffff"
+en      = "Format failed."
+
+[[glyph_label]]
+addr    = 0x8007162c
+width   = 26
+src_hex = "748348835b817d8362836783b582c482a282dc82b7824281ffff"
+en      = "Formatting.."
+
+[[glyph_label]]
+addr    = 0x80071648
+width   = 40
+src_hex = "818382838a835b814a835b816883c982feff41834e835a835883b582c482a282dc82b7824281ffff"
+en      = "Reading Card..."
+
+[[glyph_label]]
+addr    = 0x80071670
+width   = 32
+src_hex = "b182cc8266835b815e83cd82feff678e7097c582ab82dc82b982f1824281ffff"
+en      = "Data unusable."
+
+[[glyph_label]]
+addr    = 0x80071690
+width   = 64
+src_hex = "76838c83438366835b815e83f0825a835b81758386924281feff818382838a835b814a835b816883f082feffb294a982c882a282c582ba89b382a2824281ffff"
+en      = "Saving. Don't\nremove Card."
