@@ -10,6 +10,15 @@
 # Release packaging artifacts
 /release-stage/
 *.zip
+# Downloaded toolchain artifacts cached by package_release.ps1 (fetched on demand)
+/tools/_toolchain_cache/
+
+# Per-game launcher art (copyrighted disc/box art — supplied locally, never public)
+/launcher_art/
+
+# Local scratch / screenshot dirs
+/scratch_old/
+/shots/
 
 # Local PlayStation assets (disc image, extracted boot EXE, memory cards)
 /tsumu/
@@ -61,3 +70,13 @@ starvation_dump.jsonl
 
 # Python caches
 __pycache__/
+
+# Root-level scratch / probe artifacts (keep annotations/, seeds/, translations/)
+/_*.txt
+/_*.hex
+/_*.json
+/_*.bmp
+/_*.png
+/_*.c
+/_*.dll
+/_*.exe

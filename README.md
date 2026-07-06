@@ -26,7 +26,20 @@ cmake --build build-master
 Regenerate the recompiled C by invoking the framework recompiler against
 `game.toml` (see the framework docs / `regen` recipe), then rebuild.
 
+## Localization
+
+Tsumu Light ships an optional English fan-translation applied at runtime (HUD,
+menus, and memory-card dialogs). Pick the language in the launcher under
+**Settings → Localization**:
+
+- **English** (default) — the translated text.
+- **Default** — the untranslated original (Japanese).
+
+The translation data lives in `translations/tsumu.toml`; no game assets are
+modified on disc.
+
 ## Status
 
-Bring-up — scaffolded 2026-06-22. See `DISC.md` for disc identity and the region
-(NTSC-J BIOS) note in `CLAUDE.md`.
+Playable — v0.0.1 (2026-07-06). Boots via instant HLE boot, plays with keyboard
+or a DualShock/DualSense (selected in the launcher). See `DISC.md` for disc
+identity and the region (NTSC-J BIOS) note in `CLAUDE.md`.

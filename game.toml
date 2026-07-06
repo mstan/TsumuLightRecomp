@@ -29,6 +29,17 @@ memcard_dir = "saves"
 default_mode = "digital"   # DualShock present, but default to digital pad reporting (Tsumu is a digital game)
 lock_mode    = true        # single pad type; no launcher selector
 
+# Localization: the launcher shows a "Localization" dropdown of these options.
+# `default` is pre-selected (English). Code "off" runs the game untranslated
+# (native Japanese) — labelled "Default" since the untranslated source language
+# is game-specific. Only Tsumu declares this today, so only Tsumu gets the menu.
+[localization]
+default = "en"
+languages = [
+    { code = "en",  label = "English" },
+    { code = "off", label = "Default" },
+]
+
 # ── Audit-specific config (consumed by psxrecomp/tools/*.py and tests) ──
 # Schema mirrors psxrecomp/bios/SCPH1001.toml. Paths are relative to the
 # project root.
