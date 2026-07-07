@@ -30,10 +30,15 @@ This project inherits, in order:
 - The framework version this project builds against is pinned in
   `psxrecomp-v4.pin`.
 
-## Region note
+## Region note — NTSC-U SCPH1001 is what we ship on
 
-Tsumu Light is an **NTSC-J (SLPS)** title. The PSX boot ROM region-locks the
-disc against the console BIOS, so this game wants a **Japanese BIOS**
-(SCPH1000/SCPH5500) — a US BIOS (SCPH1001/SCPH5501) may reject the disc at the
-license check. If the recompiled-BIOS boot fails the region/license check, swap
-in a JP BIOS and rebuild.
+Tsumu Light is an **NTSC-J (SLPS)** title, but we run it with the standard
+**NTSC-U `SCPH1001.BIN`** (the framework's shared BIOS). That works because the
+default **HLE boot** (`[runtime] bios_hle = true`, framework default) synthesizes
+the post-boot kernel handoff and jumps straight to the game — the console boot
+ROM's region/license check never runs, so the US BIOS is fine.
+
+The region lock only matters on the **LLE path** (`bios_hle = false`, real BIOS
+boot): there the NTSC-U boot ROM may reject the SLPS disc at the license check,
+and you'd want a Japanese BIOS (SCPH1000/SCPH5500). For normal play (HLE
+default), SCPH1001 is correct — don't swap BIOSes.

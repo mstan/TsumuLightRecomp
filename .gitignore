@@ -13,8 +13,13 @@
 # Downloaded toolchain artifacts cached by package_release.ps1 (fetched on demand)
 /tools/_toolchain_cache/
 
-# Per-game launcher art (copyrighted disc/box art — supplied locally, never public)
-/launcher_art/
+# Per-game launcher art. launcher_art/img/disc.png (the game's boxart shown in
+# the launcher) IS committed so the shipped launcher shows Tsumu's cover, not the
+# framework's default disc (matches MegaManX6Recomp). Any other local art stays out.
+/launcher_art/*
+!/launcher_art/img/
+/launcher_art/img/*
+!/launcher_art/img/disc.png
 
 # Local scratch / screenshot dirs
 /scratch_old/
