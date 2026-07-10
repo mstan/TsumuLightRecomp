@@ -1,9 +1,21 @@
-# 2026-07-06: wt/tsumu MERGED to master and RETIRED (branch + worktree deleted).
-# Tsumu now builds against the shared master checkout like MMX4/5/6 + Tomba. All
-# of Tsumu's framework work (RAM 4x mirror, cdrom Stop 0x08 / MotorOn 0x07, the
-# localization tier, the text-image-guard byte-compare + dirty_ram_text_bless
-# fix) is on master, plus the HLE-boot-default flip. Regen game C against master
-# before a release build (codegen unchanged since the merge, but regen out of
-# caution). Prev pin: c586bad on the deleted wt/tsumu branch.
+# 2026-07-10 (v0.0.2): pin bumped to master e5a958f — the CRITICAL
+# release-install boot fix: the dirty-RAM text-image guard now arms from the
+# boot EXE extracted off the user's DISC image when no local EXE file exists
+# (main.cpp arm_text_image_guard). Release zips whose pin contained 685f38d
+# (the Jul 4 text-divergence guard) could fail to boot outside a dev checkout
+# because the guard only armed from a repo-local EXE found via a marker walk;
+# v0.0.1's pin (864ac40) contained it, so v0.0.1 was at risk on user machines.
+# NB: Tsumu's translation layer leans on this guard (byte-compare +
+# dirty_ram_text_bless), so arming it on END-USER installs matters doubly here.
+# Also inherited since 864ac40: L3/R3 stick-click binds (f1afc7f), RmlUi
+# launcher restored on master (f36b458), MMX6 mirrored-UV rect fix, MMX4/5
+# true-wide merges.
+#
+# CODEGEN note: no regen for v0.0.2 (runtime-only changes since 864ac40 for
+# this title; the packager builds the validated generated/ as-is).
+#
+# RELEASE GATE: before publishing, extract the packaged zip to a directory
+# OUTSIDE any git checkout and verify it boots to gameplay visually.
+# Prev pin: 864ac40 (master, wt/tsumu merge + HLE-boot-default).
 branch=master
-sha=864ac40
+sha=e5a958f

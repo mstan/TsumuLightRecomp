@@ -1,5 +1,23 @@
 # Tsumu Light Recomp — Release Notes
 
+## v0.0.2 — 2026-07-10
+
+### 🛠️ Critical boot fix
+
+- **The v0.0.1 zip could fail to start on user machines.** It relied on a
+  reference copy of the game's boot executable that only exists in a
+  development checkout (it is game data, so it is never shipped in the zip).
+  Without it the runtime's text-integrity guard never armed — the guard that,
+  among other things, the English-translation layer depends on. The runtime
+  now extracts that reference directly from **your disc image** — the same
+  bytes the BIOS boots — so it works on every install.
+- **The package is now self-contained.** v0.0.1 shipped loose MinGW runtime
+  DLLs (`SDL2.dll`, `libgcc_s_seh-1.dll`, …) which could collide with copies
+  elsewhere on the DLL search path (`0xc000007b` on launch). v0.0.2 is a
+  single statically-linked executable importing only Windows system DLLs.
+- The package now also ships `game.toml`, the English `translations/` tables,
+  release notes, and a `START_HERE.txt`.
+
 ## v0.0.1 — 2026-07-06
 
 First public release. Tsumu Light (Japan, SLPS-02253) statically recompiled to a
