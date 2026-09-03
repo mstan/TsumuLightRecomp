@@ -1,0 +1,7 @@
+Put your own Tsumu Light disc files in the tsumu/ folder next to this file.
+
+The expected default cue path is:
+
+  tsumu/Tsumu Light (Japan).cue
+
+Run Tsumu_Light_Recompiled from this directory after adding the disc files.
