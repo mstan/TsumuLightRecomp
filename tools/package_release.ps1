@@ -10,8 +10,7 @@ param(
 # the 0xc000007b footgun) with no game.toml or translations. This packager
 # builds the static self-contained exe and stages the full player layout.
 #
-# NOTE: this intentionally does NOT regenerate the game C; it builds the
-# validated generated/ as-is against the pinned framework.
+# The generated game C is produced before the runtime build when it is missing.
 
 $ErrorActionPreference = "Stop"
 
@@ -35,6 +34,42 @@ function Invoke-Native {
     $code = $LASTEXITCODE
     $ErrorActionPreference = $old
     if ($code -ne 0) { throw "$What failed (exit $code)" }
+}
+
+function Ensure-BiosBackends {
+    param([Parameter(Mandatory)][string]$FrameworkRoot)
+    $stems = @()
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\OpenBIOS.toml")) {
+        $stems += ,@("OpenBIOS", "bios/OpenBIOS.toml")
+    }
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\SCPH1001.BIN")) {
+        $stems += ,@("SCPH1001", "bios/SCPH1001.toml")
+    }
+    if (-not $stems) { throw "No BIOS profile available under $FrameworkRoot\bios" }
+
+    $missing = @($stems | Where-Object {
+        -not (Test-Path -LiteralPath (Join-Path $FrameworkRoot ("generated\{0}_dispatch.c" -f $_[0])))
+    })
+    if (-not $missing) { return }
+
+    $bash = $null
+    foreach ($cand in @("C:\msys64\usr\bin\bash.exe", "C:\msys64\mingw64\bin\bash.exe")) {
+        if (Test-Path -LiteralPath $cand) { $bash = $cand; break }
+    }
+    if (-not $bash) {
+        throw ("Missing recompiled BIOS backend(s): {0}. Install MSYS2 or run " +
+               "psxrecomp-v4/tools/regen_bios.sh manually." -f (($missing | ForEach-Object { $_[0] }) -join ', '))
+    }
+
+    $cygpath = Join-Path (Split-Path -Parent $bash) "cygpath.exe"
+    $posixRoot = (& $cygpath -u $FrameworkRoot).Trim()
+    $posixMingw = (& $cygpath -u $MingwBin).Trim()
+    foreach ($stem in $missing) {
+        Write-Host "Generating recompiled BIOS backend: $($stem[0])"
+        $biosShellCmd = "export PATH='$posixMingw':`$PATH; cd '$posixRoot' && " +
+                        "PSXRECOMP_BIOS_BUILD=recompiler/build tools/regen_bios.sh --config $($stem[1])"
+        Invoke-Native { & $bash -c $biosShellCmd } "regen_bios ($($stem[0]))"
+    }
 }
 
 function Get-TomlScalar {
@@ -65,7 +100,16 @@ if (-not (Test-Path -LiteralPath (Join-Path $RecompDir "build.ninja"))) {
         cmake -S $RecompSourceDir -B $RecompDir -G Ninja -DCMAKE_BUILD_TYPE=Release
     } "recompiler configure"
 }
-Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
+Invoke-Native { cmake --build $RecompDir --target psxrecomp-game psxrecomp-bios -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
+Ensure-BiosBackends -FrameworkRoot $FrameworkRoot
+
+$GeneratedDispatch = Join-Path $Root "generated\SLPS_022.53_dispatch.c"
+if (-not (Test-Path -LiteralPath $GeneratedDispatch)) {
+    Write-Host "Generated game C missing; running psxrecomp-game"
+    Invoke-Native {
+        & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
+    } "game regen"
+}
 
 # Build: Release, debug tools OFF, launcher ON. PSX_STATIC_RUNTIME defaults ON
 # for MinGW Release so the exe imports only system DLLs (self-contained).
@@ -98,8 +142,25 @@ $fontCount = (Get-ChildItem (Join-Path $Stage "assets/fonts") -Filter *.ttf -Err
 $imgCount  = (Get-ChildItem (Join-Path $Stage "assets/img")   -Filter *.tga -ErrorAction SilentlyContinue).Count
 Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount image(s)"
 
+$BundledBiosSrc = Join-Path $BuildPath "bios"
+if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
+    (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or
+    !(Test-Path (Join-Path $BundledBiosSrc "OpenBIOS.LICENSE"))) {
+    throw "Runtime build did not stage OpenBIOS and its MIT notice"
+}
+$BundledBiosDst = Join-Path $Stage "bios"
+New-Item -ItemType Directory -Force $BundledBiosDst | Out-Null
+Copy-Item (Join-Path $BundledBiosSrc "openbios.bin") $BundledBiosDst
+Copy-Item (Join-Path $BundledBiosSrc "OpenBIOS.LICENSE") $BundledBiosDst
+$ThirdPartyLicenses = Join-Path $Stage "licenses"
+New-Item -ItemType Directory -Force $ThirdPartyLicenses | Out-Null
+if (Test-Path (Join-Path $FrameworkRoot "runtime\licenses\libchdr-NOTICES.txt")) {
+    Copy-Item (Join-Path $FrameworkRoot "runtime\licenses\libchdr-NOTICES.txt") `
+        $ThirdPartyLicenses
+}
+
 Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
-               -FrameworkModSource (Join-Path $FrameworkRoot "mods\builtin") | Out-Null
+               -RuntimeTarget "psx-runtime" | Out-Null
 
 # English translation tables: the runtime loads translations/*.toml under the
 # project root (= the exe dir for an extracted install). Without these the
