@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Tsumu Light Recompiled
+Exec=Tsumu_Light_Recompiled
+Icon=io.github.mstan.TsumuLightRecomp
+Categories=Game;
+Terminal=false

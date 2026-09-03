@@ -1,6 +1,7 @@
 param(
     [string]$Version = "v0.0.2",
-    [string]$BuildDir = "build-release"
+    [string]$BuildDir = "build-release",
+    [string]$CacheBuildDir = "build-release"
 )
 
 # Tsumu Light (SLPS-02253) release packager. Adapted from ApeEscapeRecomp.
@@ -20,6 +21,7 @@ $StageRoot = Join-Path $Root "release-stage"
 $Stage = Join-Path $StageRoot "TsumuLightRecomp-windows-x64"
 $ZipPath = Join-Path $Root ("TsumuLightRecomp-{0}-windows-x64.zip" -f $Version)
 $MingwBin = "C:\msys64\mingw64\bin"
+$FrameworkRoot = Join-Path $Root "psxrecomp-v4"
 
 $env:PATH = "$MingwBin;$env:PATH"
 
@@ -34,6 +36,36 @@ function Invoke-Native {
     $ErrorActionPreference = $old
     if ($code -ne 0) { throw "$What failed (exit $code)" }
 }
+
+function Get-TomlScalar {
+    param(
+        [Parameter(Mandatory)][string]$GameToml,
+        [Parameter(Mandatory)][string]$Table,
+        [Parameter(Mandatory)][string]$Key
+    )
+    $section = ""
+    foreach ($raw in (Get-Content -LiteralPath $GameToml)) {
+        $line = $raw.Trim()
+        if (-not $line -or $line.StartsWith("#")) { continue }
+        if ($line -match '^\[\[?([^\]]+)\]\]?$') { $section = $Matches[1].Trim(); continue }
+        if ($section -ne $Table) { continue }
+        if ($line -match ('^' + [regex]::Escape($Key) + '\s*=\s*(.+?)\s*(?:#.*)?$')) {
+            return $Matches[1].Trim().Trim('"').Trim("'")
+        }
+    }
+    return $null
+}
+
+. (Join-Path $FrameworkRoot "tools\release_overlay_stage.ps1")
+
+$RecompSourceDir = Join-Path $FrameworkRoot "recompiler"
+$RecompDir = Join-Path $RecompSourceDir "build"
+if (-not (Test-Path -LiteralPath (Join-Path $RecompDir "build.ninja"))) {
+    Invoke-Native {
+        cmake -S $RecompSourceDir -B $RecompDir -G Ninja -DCMAKE_BUILD_TYPE=Release
+    } "recompiler configure"
+}
+Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
 
 # Build: Release, debug tools OFF, launcher ON. PSX_STATIC_RUNTIME defaults ON
 # for MinGW Release so the exe imports only system DLLs (self-contained).
@@ -66,6 +98,9 @@ $fontCount = (Get-ChildItem (Join-Path $Stage "assets/fonts") -Filter *.ttf -Err
 $imgCount  = (Get-ChildItem (Join-Path $Stage "assets/img")   -Filter *.tga -ErrorAction SilentlyContinue).Count
 Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount image(s)"
 
+Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
+               -FrameworkModSource (Join-Path $FrameworkRoot "mods\builtin") | Out-Null
+
 # English translation tables: the runtime loads translations/*.toml under the
 # project root (= the exe dir for an extracted install). Without these the
 # launcher's Localization dropdown has nothing to apply.
@@ -84,6 +119,37 @@ if ($idx -ge 0) {
 $playerToml = if ($cut -ge 0) { $realToml.Substring(0, $cut).TrimEnd() + "`n" } else { $realToml }
 $playerToml | Set-Content -Encoding ASCII (Join-Path $Stage "game.toml")
 Write-Host "Staged player game.toml from real game.toml (audit section stripped)"
+
+$RecompTools = (Resolve-Path (Join-Path $FrameworkRoot "tools")).Path
+$RecompInc   = (Resolve-Path (Join-Path $FrameworkRoot "runtime\include")).Path
+$StagedGameToml = Join-Path $Stage "game.toml"
+$CacheGameId = Get-TomlScalar -GameToml $StagedGameToml -Table "game" -Key "id"
+if (-not $CacheGameId) { throw "Could not read [game] id from $StagedGameToml" }
+$CgTag = Get-OverlayCgTag -RecompTools $RecompTools -RecompInc $RecompInc `
+                          -GameExe (Join-Path $RecompDir "psxrecomp-game.exe") `
+                          -GameToml $StagedGameToml `
+                          -BuildPath $BuildPath -RuntimeTarget "psx-runtime"
+Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
+
+$OverlayCacheDeclared =
+    ((Get-TomlScalar -GameToml $StagedGameToml -Table "runtime" -Key "overlay_cache") -eq "true")
+if ($OverlayCacheDeclared) {
+    $CacheSrcRoot = if ([System.IO.Path]::IsPathRooted($CacheBuildDir)) {
+        $CacheBuildDir
+    } else {
+        Join-Path $Root $CacheBuildDir
+    }
+    foreach ($p in @($CacheSrcRoot, (Resolve-Path -LiteralPath $CacheSrcRoot -ErrorAction SilentlyContinue).Path)) {
+        if ($p -and $p -match 'QUARANTINE') { throw "Refusing quarantined overlay cache source: $p" }
+    }
+    Add-OverlayCache -GameId $CacheGameId -CacheSrcRoot (Join-Path $CacheSrcRoot "cache") `
+                     -Stage $Stage -CgTag $CgTag | Out-Null
+} else {
+    Write-Host "Staged game.toml does not declare overlay_cache; staging no shard cache"
+}
+Add-OverlayToolchain -Stage $Stage -RecompDir $RecompDir -RecompTools $RecompTools `
+                     -RecompInc $RecompInc -MingwBin $MingwBin `
+                     -DlCache (Join-Path $Root "tools\_toolchain_cache") | Out-Null
 
 # Verify self-containment: imports must be system DLLs only.
 $objdump = Join-Path $MingwBin "objdump.exe"
