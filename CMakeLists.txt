@@ -31,6 +31,10 @@ psxrecomp_add_runtime_target(psx-runtime
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
     PRELOADED_MODS_DIR "${_tsumu_mods}"
+    # Loading policy belongs to this title; generic acceleration is retired.
+    EXCLUDE_BUILTIN_MODS
+        psx.enhancement.fast-loading
+        psx.enhancement.cd-speed
     EXTRAS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_presentation.c"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_frame_interpolation.cpp"
 )
