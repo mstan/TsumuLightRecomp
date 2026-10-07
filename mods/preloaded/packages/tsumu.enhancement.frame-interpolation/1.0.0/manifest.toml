@@ -15,7 +15,7 @@ id = "frame-interpolation"
 name = "Native Scene Interpolation"
 description = "Redraws intermediate geometry positions in the 3D play scenes. Menus and other screens keep their original cadence. Requires OpenGL."
 group = "Frame Rate"
-default_enabled = true
+default_enabled = false
 
 [[option]]
 feature = "frame-interpolation"
