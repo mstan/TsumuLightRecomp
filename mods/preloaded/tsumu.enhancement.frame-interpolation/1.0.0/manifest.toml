@@ -1,0 +1,49 @@
+format_version = 5
+id = "tsumu.enhancement.frame-interpolation"
+version = "1.0.0"
+name = "Tsumu Native Scene Interpolation"
+author = "TsumuLightRecomp"
+description = "Rebuild intermediate 3D scenes while game logic, input and audio retain their original cadence."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPS-02253"
+
+[[feature]]
+id = "frame-interpolation"
+name = "Native Scene Interpolation"
+description = "Redraws intermediate geometry positions in the 3D play scenes. Menus and other screens keep their original cadence. Requires OpenGL."
+group = "Frame Rate"
+default_enabled = false
+
+[[option]]
+feature = "frame-interpolation"
+id = "rate"
+label = "Presentation rate"
+type = "choice"
+default = "display"
+
+[[option.choice]]
+value = "display"
+label = "Display refresh (Recommended)"
+
+[[option.choice]]
+value = "60"
+label = "60 FPS"
+
+[[option.choice]]
+value = "120"
+label = "120 FPS"
+
+[[option.choice]]
+value = "144"
+label = "144 FPS"
+
+[[option.choice]]
+value = "165"
+label = "165 FPS"
+
+[[plugin]]
+feature = "frame-interpolation"
+id = "tsumu.frame-interpolation"

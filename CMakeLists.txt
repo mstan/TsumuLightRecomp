@@ -32,6 +32,7 @@ psxrecomp_add_runtime_target(psx-runtime
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
     PRELOADED_MODS_DIR "${_tsumu_mods}"
     EXTRAS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_presentation.c"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_frame_interpolation.cpp"
 )
 
 # Add title policy bytes to the existing shared-core contract and refresh the
@@ -41,6 +42,7 @@ foreach(_target psx-runtime psx-runtime-pgxp)
     if(TARGET ${_target})
         set_property(TARGET ${_target} APPEND PROPERTY PSX_EXECUTION_CONTRACT_FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_presentation.c"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/tsumu_frame_interpolation.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/game.toml"
             "${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt"
             "${CMAKE_CURRENT_SOURCE_DIR}/cmake/tsumu_profile.cmake"

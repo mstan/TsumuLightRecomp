@@ -12,6 +12,8 @@ stack_base = "0x801FFFF0"
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 strict = true
+mod_function_entry_funcs = ["0x800182A4", "0x800184EC", "0x80052F2C"]
+mod_instruction_sites = ["0x8001847C", "0x800189F8"]
 
 [runtime]
 debug_port = 4510
@@ -39,6 +41,8 @@ lock_mode    = true        # single pad type; no launcher selector
 [video]
 renderer = "opengl"
 internal_resolution = "1080p"
+frame_interpolation = false
+offer_frame_interpolation = false
 resolution_reference_lines = 240
 texture_filtering = "nearest"
 geometry_correction = true
