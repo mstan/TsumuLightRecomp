@@ -20,6 +20,10 @@ claim is supported by this milestone.
   `F:/Projects/psxrecomp/_wt-parity-hle-20261006`. The submodule gitlink records
   it. The secondary unpromoted DMA change is excluded. Codegen 18 / `d1867bb4`
   is the campaign generation baseline; generation remains pending here.
+- First-review UI pin: `03d58aa0`, shared with the current campaign runtime.
+  The owner's resumed instruction prioritizes the ENHANCED Windows build and
+  a short tutorial/puzzle playtest. The broader qualification matrix below is
+  deferred; native interpolation, wider view and title loading HLE remain open.
 - English defaults, translation records, controller reporting, stage rules,
   battery/puzzle progression, saves and the explicit 4:3 world scope are kept.
 
