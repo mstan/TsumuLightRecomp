@@ -152,3 +152,26 @@ syntax results, not compiler, gameplay or package results.
 5. Produce and extract a native Linux AppImage; verify final ELF digest/identity,
    untouched player input/cards/cache on reseeding and package launch.
 6. Owner final playtest. Keep the Bead open until the requested outcome passes.
+
+## First Windows owner-review candidate
+
+The ENHANCED runtime built from title `91cea82`, framework `e5e2dca8` and
+recomp-ui `03d58aa0`. All 356 runtime build tasks succeeded. The executable is
+`build-campaign-enhanced/Tsumu_Light_Recompiled.exe`, SHA-256
+`e96e2f2e72bd02684f8ec6a582c4d9b930761e2a03832dca737e068cfeecfc9b`.
+Its imports are Windows system libraries. Execution identity is
+`903f66ebb45369b651774c3d3c758589c507f34d4a1ca4300a51e4db89a21a8c`;
+no title HLE implementation family is claimed. The profile-specific player
+configuration, translations and input defaults are staged by the build.
+
+Owner launcher: `F:/Projects/psxrecomp/parity-review-20261006/Play-Tsumu.ps1`,
+with an executable-bound receipt, private cards and debug port 4690.
+OpenGL/1080p, PGXP and stable world filtering are selected. Check tutorial to
+puzzle progression, crate pickup/orientation, battery/course progression,
+English/Japanese prompts, save/load and audio. No new gameplay smoke ran.
+
+No qualified overlay inventory exists for this candidate. Local uncaptured
+code compilation uses the current emitter/compiler, two workers and unchanged
+config hash `c15c8ed0`; interpreter fallback remains available. Wider view,
+native interpolation, title loading HLE, Linux artifacts and final acceptance
+remain open. This build preserves the current 4:3/localization/puzzle scope.
