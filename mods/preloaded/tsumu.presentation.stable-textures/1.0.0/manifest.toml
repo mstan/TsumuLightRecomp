@@ -1,0 +1,22 @@
+format_version = 5
+id = "tsumu.presentation.stable-textures"
+version = "1.0.0"
+name = "Stable world textures"
+author = "TsumuLightRecomp"
+description = "Bounded texture minification for tracked 3D polygons on OpenGL, keeping untracked menus and sprites sharp. Title playtest qualification remains pending."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPS-02253"
+
+[[feature]]
+id = "stable-textures"
+name = "Stable world textures"
+description = "Uses proven projection tracking for world filtering. Other rendering backends use the shared bilinear fallback."
+group = "Visual"
+default_enabled = true
+
+[[plugin]]
+feature = "stable-textures"
+id = "tsumu.presentation.stable-textures"

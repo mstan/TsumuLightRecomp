@@ -1,5 +1,10 @@
 # Framework pin history (historical)
 
+2026-10-06 source campaign: the isolated Tsumu parity branch pins
+`8f95b599997399a476062e99634ddbb67e5c8731`. Compilation and owner playtest are
+pending; this is not a released-build qualification. See
+[PARITY_QUALIFICATION.md](PARITY_QUALIFICATION.md) for exact source scope.
+
 The `psxrecomp` framework used to be pinned via this hand-maintained
 `psxrecomp-v4.pin` file. That mechanism has been **replaced by a real git
 submodule**: the framework commit this repo builds against is now recorded as

@@ -11,12 +11,19 @@ This project inherits, in order:
 1. `F:/Projects/recomp-template/PRINCIPLES.md` — system-agnostic recomp/debug
    discipline (ground truth = original EXE + emulator oracle; generated C is
    evidence, not authority; first-divergence; no guessing).
-2. The framework constitution at `psxrecomp-v4/CLAUDE.md` — a junction →
-   a psxrecomp worktree. Read it first: no MIPS interpreter, no HLE BIOS shims,
-   no stubs, recompiled-BIOS-first, fix the framework/runtime/config and
+2. `F:/Projects/recomp-template/HLE.md` is authoritative for build-selected
+   HLE/LLE and caller contracts; it supersedes older blanket HLE prohibitions.
+3. The framework constitution at `psxrecomp-v4/CLAUDE.md` — a junction →
+   a psxrecomp worktree. Read it first: no stubs, recompiled-BIOS-first,
+   fix the framework/runtime/config and
    **regenerate** — never hand-edit `generated/`.
 
 ## Project rules
+
+- Current source qualification: `docs/PARITY_QUALIFICATION.md`. ENHANCED and
+  REFERENCE are developer build selections, not new runtime HLE preferences.
+- Keep title work isolated when another owner's session is active. Do not
+  alter, reset, stash, delete, or terminate that session's work or processes.
 
 - Game binaries (disc image, extracted boot EXE, the headerless Ghidra dump),
   Ghidra databases, memory cards, and build outputs are **local only** and must

@@ -9,6 +9,10 @@
 
 # Release packaging artifacts
 /release-stage/
+/dist/
+/release-linux/
+*.AppImage
+*.AppImage.sha256
 *.zip
 # Downloaded toolchain artifacts cached by package_release.ps1 (fetched on demand)
 /tools/_toolchain_cache/

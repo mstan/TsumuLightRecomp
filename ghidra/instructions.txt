@@ -57,9 +57,11 @@ game code/data is streamed from disc at runtime (TSUMU.XA, *.BIN,
 the overlay cache at runtime.
 
 ----------------------------------------------------------------
-Import via the shared Ghidra MCP server (port 4444)
+Inspect via the automatically spawned headless Ghidra MCP server
 ----------------------------------------------------------------
-The workspace runs a single headless Ghidra MCP server (mcp__psx_ghidra__*,
-http://localhost:4444/sse). Use import_file with:
-  language = MIPS:LE:32:default, base_address = 0x80010000
-on ghidra/SLPS_022.53_no_header.bin, then run auto-analysis.
+Use the global ghidra MCP registry_list(filter="psx/") then registry_open
+with the discovered Tsumu key. Open read-only for inspection. Do not launch
+a GUI, start an HTTP/SSE server, or use the retired per-project ports.
+New imports and registry maintenance follow:
+  F:/Software/Ghidra/ghidra-agent/README.md
+Commit only ghidra/annotations/*.annotations.json, never .gpr/.rep databases.

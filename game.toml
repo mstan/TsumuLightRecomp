@@ -18,14 +18,11 @@ debug_port = 4510
 turbo_loads = false
 # Load acceleration is mod-owned: players use "Fast Loading (host pacing)" /
 # "CD Speed" under Mods -> Quality of Life, both default-off. The generic switch
-# is retired in the framework, but this title still pins a framework that
-# predates that, where offer_turbo_loads IS honoured — without it, a turbo value
-# left in a stale settings.toml is restored on every launch and cannot be turned
-# off from any UI (the launcher draws no Turbo row). Remove once the pin moves.
+# is retired in the campaign framework; keep this legacy suppression so an
+# older build also cannot restore a stale turbo preference.
 offer_turbo_loads = false
 window_title = "Tsumu Light Recompiled"
-# Instant HLE boot by default (synthesize post-boot kernel handoff, skip the BIOS
-# intro). LLE full boot still available via PSX_BIOS_HLE=0.
+# ENHANCED retains instant boot; REFERENCE stages bios_hle=false at build time.
 bios_hle = true
 # Present a DualShock so the DualSense/gamepad + keyboard reliably handshake and
 # deliver input (the plain digital-pad path wasn't delivering input to the game).
@@ -36,6 +33,20 @@ memcard_dir = "saves"
 [controller]
 default_mode = "digital"   # DualShock present, but default to digital pad reporting (Tsumu is a digital game)
 lock_mode    = true        # single pad type; no launcher selector
+
+# UI/sprites stay nearest; the title plugin requests bounded mode 2 for proven
+# world polygons. REFERENCE stages native resolution without PGXP correction.
+[video]
+renderer = "opengl"
+internal_resolution = "1080p"
+resolution_reference_lines = 240
+texture_filtering = "nearest"
+geometry_correction = true
+perspective_texturing = true
+pgxp_cpu_mode = false
+pgxp_tolerance = 0.5
+pgxp_position_fallback = false
+pgxp_preserve_projection = true
 
 # Tsumu Light ships 4:3 only — no widescreen support. offer=false hides the
 # launcher's widescreen toggle and clamps the runtime to 4:3.

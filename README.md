@@ -73,7 +73,7 @@ It boots instantly via HLE boot-skip.
 | English translation | HUD, menus, stage names, card dialogs (selectable in launcher) |
 | Controller | Keyboard **and** DualShock/DualSense (digital pad — Tsumu is a digital game) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
-| Renderer | Software rasterizer (default) |
+| Renderer | ENHANCED source profile: OpenGL 1080p target with PGXP and bounded world filtering; title qualification pending |
 
 ## Features
 
@@ -83,9 +83,11 @@ It boots instantly via HLE boot-skip.
 - **Graphical launcher.** Pick your BIOS, disc, and memory cards; verify the
   disc; choose your language and controller — then press Launch. Choices persist
   to `settings.toml` next to the exe.
-- **Instant boot.** HLE boot-skip synthesizes the post-boot kernel state and
-  jumps straight into the game (on by default). Opt out for an authentic BIOS
-  intro with `[runtime] bios_hle = false` or `PSX_BIOS_HLE=0`.
+- **Build profiles.** ENHANCED retains instant boot and requests OpenGL 1080p
+  presentation. Build with `-DPSX_EXECUTION_PROFILE=REFERENCE` for native
+  resolution, no title filtering/PGXP correction and the original BIOS boot.
+  These source changes await compilation and owner playtest; see
+  [the qualification record](docs/PARITY_QUALIFICATION.md).
 - **Controller support.** Keyboard or a DualShock/DualSense (or any SDL pad),
   selectable in the launcher. Tsumu is a digital game, so the pad reports as a
   digital controller and the analog/hybrid pad-mode picker is hidden.
