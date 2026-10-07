@@ -16,7 +16,7 @@ claim is supported by this milestone.
 - `F:/Projects/TsumuGame/v2` is a separate Godot port, not this recomp.
 - Campaign branch: `codex/tsumu-parity-hle-20261006`; isolated worktree:
   `F:/Projects/psxrecomp/_wt-tsumu-parity-hle-20261006`.
-- Frozen shared framework: `8f95b599997399a476062e99634ddbb67e5c8731` at
+- Frozen shared framework: `e5e2dca85c2e7c1758c6de27870599103a1f8bfc` at
   `F:/Projects/psxrecomp/_wt-parity-hle-20261006`. The submodule gitlink records
   it. The secondary unpromoted DMA change is excluded. Codegen 18 / `d1867bb4`
   is the campaign generation baseline; generation remains pending here.
