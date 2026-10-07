@@ -18,8 +18,9 @@ parity remain open (`beads-njks`). Start it with
 - Both the stable-texture and interpolation packages now use the required
   `mods/preloaded/packages/<id>/<version>` catalog layout. The original direct
   children of `preloaded` were invisible to the catalog.
-- Native interpolation is opt-in in source and enabled in the private review
-  profile. The English localization and authentic 4:3 layout are preserved.
+- Native interpolation now defaults on in source and the private review profile,
+  per the owner's latest choice. Final performance review follows a system restart.
+  The English localization and authentic 4:3 layout are preserved.
 
 ## Bounded evidence
 
