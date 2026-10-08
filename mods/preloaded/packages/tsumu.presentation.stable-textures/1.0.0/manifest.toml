@@ -3,7 +3,7 @@ id = "tsumu.presentation.stable-textures"
 version = "1.0.0"
 name = "Stable world textures"
 author = "TsumuLightRecomp"
-description = "Bounded texture minification for tracked 3D polygons on OpenGL, keeping untracked menus and sprites sharp. Title playtest qualification remains pending."
+description = "Bounded texture minification for tracked 3D polygons on OpenGL, keeping untracked menus and sprites sharp."
 resolver = "declarative"
 save_compatibility = "shared"
 
