@@ -3,8 +3,17 @@
 Enhanced native-wide rendering follows the live window aspect. Adaptive View
 and Stable World Textures default on; OpenGL/1080p, exact projection transport,
 English localization and locked digital reporting are retained. Guest projection,
-simulation and audio remain native. Screen-space UI uses shared in-place layout;
-world horizontal rejection uses shared native-wide culling substitutions.
+simulation and audio remain native. The composed stage/battery strip anchors
+at top left; the textured preview
+(frame and spinning block together) anchors at top right through the shared
+packet-guarded HUD API. Other screen UI retains its existing layout.
+
+Original SLPS_022.53 world polygon rejection chains now use live horizontal
+bounds: 34 signed right-edge comparisons, 25 left-edge keeps and 9 final
+left-edge rejects across nine primitive paths in 8003D7FC..80041400. These
+are X-only checks after GTE SXY packet stores; Y, depth and winding remain
+architectural. At 4:3 the shared culling helpers are identity. The declaration
+lives in game.toml; generated C is emitted, never patched by hand.
 
 Interpolation is archived, uncompiled and unavailable. Older interpolation
 receipts are historical. Generic CD/host timing controls remain retired; no
@@ -14,6 +23,13 @@ Both BIOS backends are freshly emitted; the local launcher selects bundled
 OpenBIOS. Shared framework bf4246f2 includes current master cbfd24fd.
 
 Review: Play-Tsumu.ps1. Check a course at4:3,16:9 and a resized ultrawide window:
-puzzle shape, player/blocks/edges, English prompts, score/timer HUD, pause/retry.
+stage 3-1 blue goal side while rotating the view, wide attract-demo blocks,
+English stage/battery at top left and the whole preview at top right, pause/retry.
 At the name screen enter a character, then choose END. Final owner gameplay,
 course transitions and audio acceptance remain pending (beads-njks).
+
+Owner repair check: Release incremental build and original-opcode/emitted-helper
+audit pass for all 68 configured sites. Private OpenBIOS gameplay advances in
+stages 1-1 and 2-1 across 4:3/16:9/32:9; English strip anchors left. The exact
+owner stage 3-1 blue side, active preview and attract demo remain owner checks.
+No audio or complete course coverage is claimed by the private check.

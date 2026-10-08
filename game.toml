@@ -63,6 +63,35 @@ hud_sprt_squash = true
 [widescreen.cull]
 auto_screen_x = true
 
+# Original polygon renderer: all-vertices X-only rejection chains for puzzle,
+# overworld/demo and block models. Keep Y/depth/winding tests architectural.
+# 321 is the original exclusive right bound; shared helpers add live margins.
+slti_sites = [
+    "0x8003DA98", "0x8003DAAC", "0x8003DAC0", "0x8003DDC8",
+    "0x8003DDDC", "0x8003DDF0", "0x8003DE04", "0x8003E17C",
+    "0x8003E190", "0x8003E1A4", "0x8003E1B8", "0x8003E760",
+    "0x8003E774", "0x8003E788", "0x8003EA50", "0x8003EA64",
+    "0x8003EA78", "0x8003EA8C", "0x8003F428", "0x8003F43C",
+    "0x8003F450", "0x8003F464", "0x8003FBE0", "0x8003FBF4",
+    "0x8003FC08", "0x8003FC1C", "0x8003FF7C", "0x8003FF90",
+    "0x8003FFA4", "0x8003FFB8", "0x800411B4", "0x800411C8",
+    "0x800411DC", "0x800411F0",
+]
+bgez_sites = [
+    "0x8003DAD4", "0x8003DAE4", "0x8003DE18", "0x8003DE28",
+    "0x8003DE38", "0x8003E1CC", "0x8003E1DC", "0x8003E1EC",
+    "0x8003E79C", "0x8003E7AC", "0x8003EAA0", "0x8003EAB0",
+    "0x8003EAC0", "0x8003F478", "0x8003F488", "0x8003F498",
+    "0x8003FC30", "0x8003FC40", "0x8003FC50", "0x8003FFCC",
+    "0x8003FFDC", "0x8003FFEC", "0x80041204", "0x80041214",
+    "0x80041224",
+]
+bltz_sites = [
+    "0x8003DAF4", "0x8003DE48", "0x8003E1FC", "0x8003E7BC",
+    "0x8003EAD0", "0x8003F4A8", "0x8003FC60", "0x8003FFFC",
+    "0x80041234",
+]
+
 # Localization: the launcher shows a "Localization" dropdown of these options.
 # `default` is pre-selected (English). Code "off" runs the game untranslated
 # (native Japanese) â€” labelled "Default" since the untranslated source language

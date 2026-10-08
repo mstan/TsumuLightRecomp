@@ -11,6 +11,23 @@
 static void tsumu_stable_textures(void) {
     psx_mod_set_texture_filter(2);
 }
+/* Original SLPS_022.53 producers: 800427F8 submits the composed stage/battery
+ * strip at 800C26BC + bank*40; 80024DA0 submits the preview at 80110434 +
+ * bank*40. The latter texture contains BOTH the frame and rotating block.
+ * Classify by producer-owned packet address, not screen position: puzzle
+ * blocks and demo geometry can pass through either HUD corner. */
+static void tsumu_anchor_hud(uint32_t p,unsigned op,unsigned len) {
+    if(op!=0x2Cu || len!=9)return;
+    if((p==0x800C26BCu || p==0x800C26E4u) &&
+       psx_mod_read_word(0x800427F8u)==0x3C02800Cu) {
+        psx_mod_anchor_hud_primitive(p,-1);
+        psx_mod_counter_add("tsumu.wide.hud-left",1);
+    } else if((p==0x80110434u || p==0x8011045Cu) &&
+              psx_mod_read_word(0x80024DA0u)==0x3C028011u) {
+        psx_mod_anchor_hud_primitive(p,1);
+        psx_mod_counter_add("tsumu.wide.preview-right",1);
+    }
+}
 /* Only completed opaque, untextured full-width screen panels qualify.
  * Reuse the shared packet-guarded backdrop compositor; never rewrite guest
  * coordinates or apply the background transform to projected puzzle geometry. */
@@ -24,6 +41,7 @@ static void tsumu_tag_backdrop(CPUState* cpu,uint32_t address) {
         if(len>=5 && packet+4u*(len+1u)<=0x200000u) {
             uint32_t p=0x80000000u|packet;
             unsigned op=psx_mod_read_word(p+4)>>24;
+            tsumu_anchor_hud(p,op,len);
             if((op==0x28u && len==5)||(op==0x38u && len==8)) {
                 unsigned stride=op==0x38u?8u:4u;
                 uint32_t xy[4];
