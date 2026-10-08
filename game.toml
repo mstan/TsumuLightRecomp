@@ -54,6 +54,8 @@ pgxp_preserve_projection = true
 offer = false
 native_wide = true
 adaptive_view = true
+# Puzzle geometry uses GTE projection; full-2D menus remain native 4:3.
+gte_game_mode = true
 auto_ui_squash = true
 auto_ui_anchor = "in_place"
 hud_sprt_squash = true
@@ -63,7 +65,7 @@ auto_screen_x = true
 
 # Localization: the launcher shows a "Localization" dropdown of these options.
 # `default` is pre-selected (English). Code "off" runs the game untranslated
-# (native Japanese) — labelled "Default" since the untranslated source language
+# (native Japanese) â€” labelled "Default" since the untranslated source language
 # is game-specific. Only Tsumu declares this today, so only Tsumu gets the menu.
 [localization]
 default = "en"
@@ -72,12 +74,12 @@ languages = [
     { code = "off", label = "Default" },
 ]
 
-# ── Audit-specific config (consumed by psxrecomp/tools/*.py and tests) ──
+# â”€â”€ Audit-specific config (consumed by psxrecomp/tools/*.py and tests) â”€â”€
 # Schema mirrors psxrecomp/bios/SCPH1001.toml. Paths are relative to the
 # project root.
 
 [audit]
-# Dynamic discovery — functions are found by walking control flow from
+# Dynamic discovery â€” functions are found by walking control flow from
 # entry_pc. No Ghidra function-starts file is required to bootstrap.
 
 # Code region: text segment is contiguous from load_address for text_size bytes.
