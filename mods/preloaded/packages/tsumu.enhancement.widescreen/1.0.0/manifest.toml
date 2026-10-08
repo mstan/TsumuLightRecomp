@@ -1,0 +1,44 @@
+format_version = 5
+id = "tsumu.enhancement.widescreen"
+version = "1.0.0"
+name = "Tsumu Adaptive View"
+author = "mstan"
+description = "Native geometry rendered into the live window aspect, with screen-space menus and HUD preserved."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPS-02253"
+
+[[feature]]
+id = "widescreen"
+name = "Adaptive Widescreen"
+description = "Reveal the wider 3D puzzle view using the enhanced renderer."
+group = "Visual"
+default_enabled = true
+
+[[option]]
+feature = "widescreen"
+id = "aspect"
+label = "View"
+type = "enum"
+default = "adaptive"
+[[option.choice]]
+value = "adaptive"
+label = "Adaptive (fit window)"
+[[option.choice]]
+value = "4:3"
+label = "4:3"
+[[option.choice]]
+value = "16:9"
+label = "16:9"
+[[option.choice]]
+value = "21:9"
+label = "21:9"
+[[option.choice]]
+value = "32:9"
+label = "32:9"
+
+[[plugin]]
+feature = "widescreen"
+id = "tsumu.adaptive-view"

@@ -1,10 +1,7 @@
-# Tsumu serial review policy
+# Tsumu serial policy
 
-The current owner direction avoids interpolation in remaining serial games.
-Its source/catalog are archived under development/retired-interpolation and
-on archive/tsumu-interpolation-before-serial-20261008T065211Z.
-It is unavailable in the current build. Original loader/render hooks remain.
-Generic CD/host pacing remains absent. Existing upscaling, view/precision and
-resident loading are retained where implemented; final review belongs to owner.
-Shared framework pin: e740b81c3cf92314642383f25792b7180811fe23. No release is published by this preparation.
-Older native interpolation evidence is historical, not current acceptance.
+Adaptive native-wide/1080p/Stable World Textures default on. Interpolation is
+archived under development/retired-interpolation, uncompiled and unavailable.
+English localization/digital reporting retained. Generic loading controls
+retired; title loader remains separate. OpenBIOS selected for review. Framework
+bf4246f2, including latest master cbfd24fd. Owner acceptance pending; no release.

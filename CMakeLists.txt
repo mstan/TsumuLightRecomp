@@ -48,7 +48,8 @@ foreach(_target psx-runtime psx-runtime-pgxp)
             "${CMAKE_CURRENT_SOURCE_DIR}/game.toml"
             "${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt"
             "${CMAKE_CURRENT_SOURCE_DIR}/cmake/tsumu_profile.cmake"
-            "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded/packages/tsumu.presentation.stable-textures/1.0.0/manifest.toml")
+            "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded/packages/tsumu.presentation.stable-textures/1.0.0/manifest.toml"
+            "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded/packages/tsumu.enhancement.widescreen/1.0.0/manifest.toml")
         _psx_execution_stamp(${_target})
         add_custom_command(TARGET ${_target} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_tsumu_player_config}"

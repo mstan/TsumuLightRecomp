@@ -18,10 +18,7 @@ mod_instruction_sites = ["0x8001847C", "0x800189F8"]
 [runtime]
 debug_port = 4510
 turbo_loads = false
-# Load acceleration is mod-owned: players use "Fast Loading (host pacing)" /
-# "CD Speed" under Mods -> Quality of Life, both default-off. The generic switch
-# is retired in the campaign framework; keep this legacy suppression so an
-# older build also cannot restore a stale turbo preference.
+# Generic CD Speed/host pacing options are retired; no title loader claimed.
 offer_turbo_loads = false
 window_title = "Tsumu Light Recompiled"
 # ENHANCED retains instant boot; REFERENCE stages bios_hle=false at build time.
@@ -52,10 +49,17 @@ pgxp_tolerance = 0.5
 pgxp_position_fallback = false
 pgxp_preserve_projection = true
 
-# Tsumu Light ships 4:3 only — no widescreen support. offer=false hides the
-# launcher's widescreen toggle and clamps the runtime to 4:3.
+# Title-owned modern native-wide view; the mod supplies Adaptive/ratio choices.
 [widescreen]
 offer = false
+native_wide = true
+adaptive_view = true
+auto_ui_squash = true
+auto_ui_anchor = "in_place"
+hud_sprt_squash = true
+
+[widescreen.cull]
+auto_screen_x = true
 
 # Localization: the launcher shows a "Localization" dropdown of these options.
 # `default` is pre-selected (English). Code "off" runs the game untranslated
