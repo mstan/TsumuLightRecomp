@@ -1,6 +1,7 @@
 #include "execution_profile.h"
 #include "mod_plugins.h"
 #include "gpu.h"
+#include "cpu_state.h"
 #include <string.h>
 
 /* Presentation only. No guest ABI, timing, simulation or packet edits. Mode 2
