@@ -5,3 +5,13 @@ The expected default cue path is:
   tsumu/Tsumu Light (Japan).cue
 
 Run Tsumu_Light_Recompiled from this directory after adding the disc files.
+
+On Linux, make the AppImage executable and launch it, then select your disc.
+Bundled OpenBIOS is selected automatically; no retail BIOS is required.
+
+OpenGL with 1080p internal resolution, Adaptive View, Stable World Textures,
+and English localization default on. The stage/battery HUD anchors at top
+left and the complete block preview anchors at top right.
+
+Interpolation is unavailable. Generic CD Speed and host-pacing options are
+retired; this release does not claim a Tsumu-specific loading speedup.

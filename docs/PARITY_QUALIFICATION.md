@@ -20,16 +20,24 @@ receipts are historical. Generic CD/host timing controls remain retired; no
 Tsumu-specific loader speedup is claimed.
 
 Both BIOS backends are freshly emitted; the local launcher selects bundled
-OpenBIOS. Shared framework bf4246f2 includes current master cbfd24fd.
+OpenBIOS. The release pins shared framework 95010e1a, including master cbfd24fd
+and the shared Linux release-toolchain packaging correction.
 
 Review: Play-Tsumu.ps1. Check a course at4:3,16:9 and a resized ultrawide window:
 stage 3-1 blue goal side while rotating the view, wide attract-demo blocks,
 English stage/battery at top left and the whole preview at top right, pause/retry.
-At the name screen enter a character, then choose END. Final owner gameplay,
-course transitions and audio acceptance remain pending (beads-njks).
+At the name screen enter a character, then choose END. The owner accepted
+the adaptive view, world culling and corner HUD candidate (beads-njks).
+This approval does not establish complete course or measured audio coverage.
 
 Owner repair check: Release incremental build and original-opcode/emitted-helper
 audit pass for all 68 configured sites. Private OpenBIOS gameplay advances in
 stages 1-1 and 2-1 across 4:3/16:9/32:9; English strip anchors left. The exact
 owner stage 3-1 blue side, active preview and attract demo remain owner checks.
 No audio or complete course coverage is claimed by the private check.
+
+The v0.1.0 feature release uses production builds without developer tooling.
+Windows ZIP and native Linux AppImage packaging delegate to the shared
+framework through tools/package_release.sh and tools/package_native_appimage.sh.
+Release checks cover embedded version/profile, package defaults, dependencies,
+translation resources and bounded OpenGL startup with automatic OpenBIOS.

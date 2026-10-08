@@ -13,7 +13,7 @@ exec bash "$fw/tools/package_game_release.sh" --root "$root" \
     --zip-prefix TsumuLightRecomp --exe-name Tsumu_Light_Recompiled \
     --display-name "Tsumu Light Recompiled" --runtime-target psx-runtime \
     --runtime-dir translations --runtime-file input.ini --runtime-file START_HERE.txt \
-    --doc README.md --doc LICENSE --doc docs/PARITY_QUALIFICATION.md \
+    --doc README.md --doc LICENSE --doc RELEASE_NOTES.md --doc docs/PARITY_QUALIFICATION.md \
     --ship-without-overlay-cache-key-because "Tsumu has no qualified title overlay-loader adapter or static overlay inventory; native boot C is required and missing-code coverage remains pending." \
-    --ship-without-overlay-cache-because "No qualified Tsumu Linux overlay cache has been captured; the shared native Linux toolchain supplies compilation for uncovered executable ranges." \
+    --ship-without-overlay-cache-because "No qualified Tsumu overlay cache has been captured; the bundled native toolchain supplies compilation for uncovered executable ranges." \
     "$@"

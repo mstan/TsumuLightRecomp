@@ -1,3 +1,24 @@
+# Tsumu Light Recompiled v0.1.0 - 2026-10-08
+
+- Adaptive native widescreen follows the window aspect, replacing the old fixed view.
+- OpenGL with 1080p internal resolution, exact projection, and Stable World Textures default on.
+- Puzzle, block and attract-demo world polygons use adaptive horizontal culling.
+- The stage/battery HUD anchors top left and the complete rotating block preview anchors top right.
+- English localization and bundled OpenBIOS default on.
+- Interpolation is unavailable and generic CD/host timing options are retired. No Tsumu-specific loading speedup is claimed.
+- Windows x64 ZIP and native Linux x86_64 AppImage use the shared release packaging gates.
+
+The owner approved the adaptive view, culling and HUD gameplay candidate.
+Release checks cover package versions, profiles, defaults, translation resources,
+dependencies and bounded OpenGL startup; complete course and audio coverage
+are not claimed.
+
+Production release packaging: tools/package_release.sh for Windows and
+tools/package_native_appimage.sh for Linux, after building the runtime.
+Both delegate staging and executable-contract checks to the pinned framework.
+
+---
+
 # Tsumu Light Recomp — Release Notes
 
 ## v0.0.2 — 2026-07-10
