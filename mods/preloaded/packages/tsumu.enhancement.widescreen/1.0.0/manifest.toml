@@ -21,7 +21,9 @@ default_enabled = true
 feature = "widescreen"
 id = "aspect"
 label = "View"
-type = "enum"
+description = "Adaptive follows the window; fixed choices use the same native-wide renderer."
+group = "Visual"
+type = "choice"
 default = "adaptive"
 [[option.choice]]
 value = "adaptive"
