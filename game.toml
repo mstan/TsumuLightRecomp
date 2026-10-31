@@ -37,7 +37,8 @@ lock_mode    = true        # single pad type; no launcher selector
 # world polygons. REFERENCE stages native resolution without PGXP correction.
 [video]
 renderer = "opengl"
-internal_resolution = "1080p"
+# Native fallback; the shared Internal Resolution mod defaults to 4x.
+internal_resolution = "native"
 frame_interpolation = false
 offer_frame_interpolation = false
 resolution_reference_lines = 240

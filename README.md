@@ -73,7 +73,7 @@ It boots instantly via HLE boot-skip.
 | English translation | HUD, menus, stage names, card dialogs (selectable in launcher) |
 | Controller | Keyboard **and** DualShock/DualSense (digital pad — Tsumu is a digital game) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
-| Renderer | ENHANCED source profile: OpenGL 1080p target with PGXP and bounded world filtering; title qualification pending |
+| Renderer | ENHANCED source profile: OpenGL with shared 4x Internal Resolution, PGXP and bounded world filtering |
 
 ## Features
 
@@ -83,10 +83,10 @@ It boots instantly via HLE boot-skip.
 - **Graphical launcher.** Pick your BIOS, disc, and memory cards; verify the
   disc; choose your language and controller — then press Launch. Choices persist
   to `settings.toml` next to the exe.
-- **Build profiles.** ENHANCED retains instant boot and requests OpenGL 1080p
-  presentation. Build with `-DPSX_EXECUTION_PROFILE=REFERENCE` for native
+- **Build profiles.** ENHANCED retains instant boot and uses OpenGL with the shared Internal Resolution mod ON at 4x
+  (saved Native/1x through 32x choices in Mods; disabled uses native resolution). Build with `-DPSX_EXECUTION_PROFILE=REFERENCE` for native
   resolution, no title filtering/PGXP correction and the original BIOS boot.
-  These source changes await compilation and owner playtest; see
+  The historical title feature qualification is retained; see
   [the qualification record](docs/PARITY_QUALIFICATION.md).
 - **Controller support.** Keyboard or a DualShock/DualSense (or any SDL pad),
   selectable in the launcher. Tsumu is a digital game, so the pad reports as a
@@ -133,7 +133,7 @@ Requirements:
 ../psxrecomp/recompiler/build/psxrecomp-game.exe --config game.toml
 
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j8
+cmake --build build -j2
 ./build/Tsumu_Light_Recompiled.exe
 ```
 
@@ -141,6 +141,23 @@ cmake --build build -j8
 > generated C — a `-O0` build runs at a fraction of full speed. The framework now
 > defaults to Release if you omit `CMAKE_BUILD_TYPE`, but pass it explicitly to be
 > sure.
+
+
+The supported release command builds with fresh title-specific selective PGO and
+stages the public player layout through the pinned shared engine:
+
+```powershell
+tools/package_release.ps1 --channel public --platform windows --jobs 2
+```
+
+```sh
+tools/package_native_appimage.sh --channel public --jobs 2
+```
+
+The channel is required. Profile training is a build step, not gameplay or audio
+qualification. Release archives include OpenBIOS, the original English translation
+tables, input bindings and the overlay compiler fallback; they exclude disc data,
+retail BIOS, personal settings, cards, snapshots and compiler training profiles.
 
 ## Controls
 

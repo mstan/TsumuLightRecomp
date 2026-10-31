@@ -15,7 +15,6 @@ if(PSX_EXECUTION_PROFILE STREQUAL "REFERENCE")
     set(_tsumu_mods NONE)
     foreach(_pair
         "bios_hle = true|bios_hle = false"
-        "internal_resolution = \"1080p\"|internal_resolution = \"native\""
         "geometry_correction = true|geometry_correction = false"
         "perspective_texturing = true|perspective_texturing = false")
         string(REPLACE "|" ";" _settings "${_pair}")
