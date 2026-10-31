@@ -1,0 +1,49 @@
+# Maintained shared release builder; title runtime features remain in CMake/game.toml.
+schema = 1
+
+[product]
+name = "TsumuLightRecomp"
+display_name = "Tsumu Light Recompiled"
+exe_name = "Tsumu_Light_Recompiled"
+version_file = "VERSION"
+player_game_toml = "packaging/release/game.toml"
+zip_folder = "TsumuLightRecomp"
+launcher_boxart = "recomp/launcher/boxart.tga"
+
+[build]
+cmake_args = [
+    "-DPSX_SETUP_WIZARD=OFF",
+    "-DPSXRECOMP_FORCE_SETUP_HOST=OFF",
+    "-DPSXRECOMP_REQUIRE_GAME_C=ON",
+    "-DPSX_SDL_BACKEND=SDL3",
+    "-DPSX_ENABLE_VULKAN=OFF",
+    "-DPSX_NETPLAY=OFF",
+]
+# Regenerate from the original boot EXE; never transplant historical generated C.
+regenerate = true
+
+[aot]
+mode = "none"
+
+[overlay_toolchain]
+# Preserve the existing release's fallback for uncovered executable ranges.
+ship = true
+
+[payload]
+start_here = "packaging/release/START_HERE.txt"
+files = [
+    "VERSION",
+    "README.md",
+    "RELEASE_NOTES.md",
+    "LICENSE",
+    "docs/PARITY_QUALIFICATION.md",
+    "translations/tsumu.toml",
+    { from = "packaging/release/input.ini", to = "input.ini" },
+]
+
+[linux]
+app_run = "packaging/linux/AppRun"
+desktop_file = "packaging/linux/io.github.mstan.TsumuLightRecomp.desktop"
+icon = "recomp/launcher/boxart.tga"
+payload_dir = "tsumulightrecomp"
+env_prefix = "TSUMU_RECOMP"

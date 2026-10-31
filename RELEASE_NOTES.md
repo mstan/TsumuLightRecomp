@@ -1,3 +1,21 @@
+# Tsumu Light Recompiled v0.1.1 - 2026-10-30
+
+- Pin the merged shared engine and current launcher UI while retaining Tsumu's
+  adaptive widescreen, corner HUD, Stable World Textures, English localization,
+  digital controller reporting and native memory cards.
+- Shared Internal Resolution defaults ON at 4x, with saved Native (1x) through
+  32x choices in Mods. Turning the mod off restores native resolution.
+- Use the maintained common release builder, including fresh selective runtime
+  PGO, normal profile-training shutdown and public archive checks. Profiling is
+  a build step, not new gameplay qualification or a measured speedup claim.
+- Keep CD Speed and Fast Loading packages out of the release.
+
+The earlier owner-approved title features are retained. Current-package
+build/packaging review and a short owner visual/play check are recorded separately;
+complete course or audio coverage is not claimed by these notes.
+
+## Previous release 0.1.0
+
 # Tsumu Light Recompiled v0.1.0 - 2026-10-08
 
 - Adaptive native widescreen follows the window aspect, replacing the old fixed view.

@@ -1,0 +1,105 @@
+[game]
+name = "Tsumu Light"
+id = "SLPS-02253"
+exe = "tsumu/SLPS_022.53"
+disc = "tsumu/Tsumu Light (Japan).cue"
+load_address = "0x80010000"
+entry_pc = "0x800691F0"
+text_size = "0x00080000"
+stack_base = "0x801FFFF0"
+
+[recompiler]
+seeds = "seeds/ghidra_funcs.txt"
+out_dir = "generated"
+strict = true
+mod_function_entry_funcs = ["0x800182A4", "0x800184EC", "0x80052F2C", "0x80052CF0"]
+mod_instruction_sites = ["0x8001847C", "0x800189F8"]
+
+[runtime]
+debug_port = 4510
+turbo_loads = false
+# Generic CD Speed/host pacing options are retired; no title loader claimed.
+offer_turbo_loads = false
+window_title = "Tsumu Light Recompiled"
+# ENHANCED retains instant boot; REFERENCE stages bios_hle=false at build time.
+bios_hle = true
+# Present a DualShock so the DualSense/gamepad + keyboard reliably handshake and
+# deliver input (the plain digital-pad path wasn't delivering input to the game).
+# Tsumu is a digital game and just reads the digital buttons off the pad.
+controller = "dualshock"
+memcard_dir = "saves"
+
+[controller]
+default_mode = "digital"   # DualShock present, but default to digital pad reporting (Tsumu is a digital game)
+lock_mode    = true        # single pad type; no launcher selector
+
+# UI/sprites stay nearest; the title plugin requests bounded mode 2 for proven
+# world polygons. REFERENCE stages native resolution without PGXP correction.
+[video]
+renderer = "opengl"
+# Native fallback; the shared Internal Resolution mod defaults to 4x.
+internal_resolution = "native"
+frame_interpolation = false
+offer_frame_interpolation = false
+resolution_reference_lines = 240
+texture_filtering = "nearest"
+geometry_correction = true
+perspective_texturing = true
+pgxp_cpu_mode = false
+pgxp_tolerance = 0.5
+pgxp_position_fallback = false
+pgxp_preserve_projection = true
+
+# Title-owned modern native-wide view; the mod supplies Adaptive/ratio choices.
+[widescreen]
+offer = false
+native_wide = true
+adaptive_view = true
+# Puzzle geometry uses GTE projection; full-2D menus remain native 4:3.
+gte_game_mode = true
+auto_ui_squash = true
+auto_ui_anchor = "in_place"
+hud_sprt_squash = true
+
+[widescreen.cull]
+auto_screen_x = true
+
+# Original polygon renderer: all-vertices X-only rejection chains for puzzle,
+# overworld/demo and block models. Keep Y/depth/winding tests architectural.
+# 321 is the original exclusive right bound; shared helpers add live margins.
+slti_sites = [
+    "0x8003DA98", "0x8003DAAC", "0x8003DAC0", "0x8003DDC8",
+    "0x8003DDDC", "0x8003DDF0", "0x8003DE04", "0x8003E17C",
+    "0x8003E190", "0x8003E1A4", "0x8003E1B8", "0x8003E760",
+    "0x8003E774", "0x8003E788", "0x8003EA50", "0x8003EA64",
+    "0x8003EA78", "0x8003EA8C", "0x8003F428", "0x8003F43C",
+    "0x8003F450", "0x8003F464", "0x8003FBE0", "0x8003FBF4",
+    "0x8003FC08", "0x8003FC1C", "0x8003FF7C", "0x8003FF90",
+    "0x8003FFA4", "0x8003FFB8", "0x800411B4", "0x800411C8",
+    "0x800411DC", "0x800411F0",
+]
+bgez_sites = [
+    "0x8003DAD4", "0x8003DAE4", "0x8003DE18", "0x8003DE28",
+    "0x8003DE38", "0x8003E1CC", "0x8003E1DC", "0x8003E1EC",
+    "0x8003E79C", "0x8003E7AC", "0x8003EAA0", "0x8003EAB0",
+    "0x8003EAC0", "0x8003F478", "0x8003F488", "0x8003F498",
+    "0x8003FC30", "0x8003FC40", "0x8003FC50", "0x8003FFCC",
+    "0x8003FFDC", "0x8003FFEC", "0x80041204", "0x80041214",
+    "0x80041224",
+]
+bltz_sites = [
+    "0x8003DAF4", "0x8003DE48", "0x8003E1FC", "0x8003E7BC",
+    "0x8003EAD0", "0x8003F4A8", "0x8003FC60", "0x8003FFFC",
+    "0x80041234",
+]
+
+# Localization: the launcher shows a "Localization" dropdown of these options.
+# `default` is pre-selected (English). Code "off" runs the game untranslated
+# (native Japanese) â€” labelled "Default" since the untranslated source language
+# is game-specific. Only Tsumu declares this today, so only Tsumu gets the menu.
+[localization]
+default = "en"
+languages = [
+    { code = "en",  label = "English" },
+    { code = "off", label = "Default" },
+]
