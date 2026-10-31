@@ -17,7 +17,7 @@ cmake_args = [
     "-DPSXRECOMP_REQUIRE_GAME_C=ON",
     "-DPSX_SDL_BACKEND=SDL3",
     "-DPSX_ENABLE_VULKAN=OFF",
-    "-DPSX_NETPLAY=ON",
+    "-DPSX_NETPLAY=OFF",
 ]
 # Regenerate from the original boot EXE; never transplant historical generated C.
 regenerate = true

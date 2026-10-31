@@ -84,8 +84,9 @@ It boots instantly via HLE boot-skip.
   disc; choose your language and controller — then press Launch. Choices persist
   to `settings.toml` next to the exe.
 - **Build profiles.** ENHANCED retains instant boot and uses OpenGL with the shared Internal Resolution mod ON at 4x
-  (saved Native/1x through 32x choices in Mods; disabled uses native resolution). Build with `-DPSX_EXECUTION_PROFILE=REFERENCE` for native
-  resolution, no title filtering/PGXP correction and the original BIOS boot.
+  (saved Native/1x through 32x choices in Mods; disabled uses native resolution). Build with `-DPSX_EXECUTION_PROFILE=REFERENCE` for no title filtering/PGXP
+  correction and the original BIOS boot. Shared Internal Resolution is independent
+  of that profile; disable it or save Native (1x) to use the native fallback.
   The historical title feature qualification is retained; see
   [the qualification record](docs/PARITY_QUALIFICATION.md).
 - **Controller support.** Keyboard or a DualShock/DualSense (or any SDL pad),
