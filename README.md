@@ -194,6 +194,16 @@ Memory-card files are local artifacts and are not committed.
 
 ## License
 
+For this project's code covered by the [PolyForm Noncommercial License](LICENSE),
+[PERMISSIONS.md](PERMISSIONS.md) grants standing permission for voluntary
+donations, sponsorships, and advertising revenue, including support for broader
+development initiatives. Payment must not buy access to the software, games
+built with it, or their updates, features, or game content, including early access.
+
+Matthew Stanley has authority from the relevant copyright holders to grant
+these permissions for the project's PolyForm-covered code. Third-party
+components and code explicitly licensed under other terms retain those terms.
+
 PolyForm Noncommercial 1.0.0. See `LICENSE`.
 
 Tsumu Light is copyright its respective owners. This repository contains none of

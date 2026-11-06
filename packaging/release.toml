@@ -35,7 +35,7 @@ files = [
     "VERSION",
     "README.md",
     "RELEASE_NOTES.md",
-    "LICENSE",
+    "LICENSE", "PERMISSIONS.md",
     "docs/PARITY_QUALIFICATION.md",
     "translations/tsumu.toml",
     { from = "packaging/release/input.ini", to = "input.ini" },
